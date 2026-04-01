@@ -47,7 +47,6 @@ export default function Events() {
             </button>
           </div>
 
-          {/* Updated Card Section */}
           <div className="flex flex-row gap-3 md:gap-10 justify-center items-center order-2 mt-8 lg:mt-0">
             <div className="relative transition-transform mt-20 hover:-translate-y-4 duration-300">
               <CharizardCard title="PITCH ARENA" />

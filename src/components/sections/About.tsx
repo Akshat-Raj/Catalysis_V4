@@ -104,26 +104,15 @@ const LINES = [
   { src: "/about/Vector-5.png", top: "60%", left: "-35%", widthRatio: 0.61 },
 ];
 
-/**
- * AboutRight — fully fluid, nothing gets clipped.
- *
- * Strategy:
- * - The outer wrapper is `w-full` with a fixed aspect ratio (via padding-top trick).
- * - Everything inside is positioned absolutely using percentage values,
- *   so it scales 1-to-1 with the container width.
- * - Badge size is also expressed as a % of the container width (via CSS vars),
- *   so shape is preserved at every breakpoint.
- * - overflow-visible on the section; overflow-hidden only on the page wrapper
- *   where needed — here we just let the section breathe within the grid cell.
- */
+
 function AboutRight() {
-  // Badge dimensions as % of container width
-  const BADGE_W = 48; // %  → 240px when container is 500px
-  const BADGE_H_RATIO = 0.583; // height / width  (140/240)
+
+  const BADGE_W = 48;
+  const BADGE_H_RATIO = 0.583; 
 
   return (
     <div className="relative w-full" style={{ paddingTop: "120%" }}>
-      {/* Lines layer */}
+
       <div className="absolute inset-0 z-10 pointer-events-none">
         {LINES.map((line, i) => (
           <div
@@ -146,7 +135,7 @@ function AboutRight() {
         ))}
       </div>
 
-      {/* Badges layer */}
+
       {BADGES.map((badge, i) => (
         <div
           key={i}
@@ -154,13 +143,13 @@ function AboutRight() {
           style={{
             top: badge.top,
             left: badge.left,
-            // width as % of container; height derived to keep ratio
+
             width: `${BADGE_W}%`,
             paddingTop: `${BADGE_W * BADGE_H_RATIO}%`,
             transform: "translate(-50%, -50%)",
           }}
         >
-          {/* Absolutely fill the padding-top box */}
+
           <div className="absolute inset-0">
             <Image
               src={badge.src}
@@ -183,19 +172,19 @@ export default function About() {
       className="relative w-full bg-[#FFEEF0] py-16 md:py-24 overflow-hidden"
     >
       <Container>
-        {/* ── Mobile only (< md) ───────────────────────────────────── */}
+
         <div className="block md:hidden space-y-10">
           <AboutLeft />
           <AboutMobile />
         </div>
 
-        {/* ── Tablet + Desktop (≥ md) ──────────────────────────────── */}
+       
         <div className="hidden md:grid grid-cols-3 gap-8 items-center">
-          {/* Left text */}
+    
           <div className="col-span-1">
             <AboutLeft />
           </div>
-{/* Centre pokeball */}
+
           <div className="flex justify-center z-20">
             <Image
               src="/hero/Pokeball.png"
@@ -205,7 +194,7 @@ export default function About() {
               className="transition-transform hover:scale-105 drop-shadow-2xl h-auto w-full max-w-[120px] md:max-w-[180px] lg:max-w-[250px]"
             />
           </div>
-          {/* Right badges — fluid, never clips */}
+
           <div className="col-span-1 overflow-visible">
             <AboutRight />
           </div>

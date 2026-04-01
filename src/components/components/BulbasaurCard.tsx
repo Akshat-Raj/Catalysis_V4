@@ -16,7 +16,7 @@ export default function BulbasaurCard({ title = "PITCH ARENA", className = "" }:
         borderWidth: "max(2px, calc(var(--card-w) * 0.01))",
       } as React.CSSProperties}
     >
-      {/* Top Badge */}
+
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-[#5AC178] border-black rounded-full flex items-center justify-center shadow-sm"
         style={{
@@ -31,7 +31,6 @@ export default function BulbasaurCard({ title = "PITCH ARENA", className = "" }:
         </div>
       </div>
 
-      {/* Image Section */}
       <div 
         className="bg-[#83CCB147] w-full flex justify-center items-center border-b border-gray-100 overflow-hidden"
         style={{
@@ -46,7 +45,6 @@ export default function BulbasaurCard({ title = "PITCH ARENA", className = "" }:
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="w-full flex flex-col items-center text-center" style={{ padding: "calc(var(--card-w) * 0.06)" }}>
         <h3 
             className="font-black tracking-tight text-black uppercase"
@@ -61,7 +59,6 @@ export default function BulbasaurCard({ title = "PITCH ARENA", className = "" }:
           STRATEGY TYPE
         </p>
 
-        {/* Tags */}
         <div className="grid grid-cols-2 w-full" style={{ gap: "calc(var(--card-w) * 0.02)", marginBottom: "calc(var(--card-w) * 0.02)" }}>
           <span className="bg-[#FFD9C3] text-black font-bold rounded-full border border-[#FBB993]" style={{ fontSize: "calc(var(--card-w) * 0.032)", padding: "calc(var(--card-w) * 0.02) 0" }}>
             Speed Demon

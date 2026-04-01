@@ -45,18 +45,17 @@ export default function CTA() {
             Don&apos;t miss your chance to innovate, compete, and win.
           </p>
 
-          {/* Register Now Button — tilted ~-3deg, large bold text */}
+
           <div
             className="relative group cursor-pointer"
             style={{ transform: "rotate(3deg)" }}
           >
-            {/* Shadow: shifted right+down to sit naturally under the tilt */}
+   
             <div
               className="absolute inset-0 rounded-3xl bg-black z-0"
               style={{ transform: "translate(4px, 7px)" }}
             />
 
-            {/* Button face */}
             <button
               className="
                 relative z-10
