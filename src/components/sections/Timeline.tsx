@@ -143,7 +143,7 @@ export default function Timeline() {
             />
           </div>
 
-          <p className="text-[#3b0a1e] font-medium text-sm md:text-xl leading-relaxed max-w-xl -mb-8 md:mb-10">
+          <p className="text-[#3b0a1e] mb-1 font-medium text-sm md:text-xl leading-relaxed max-w-xl -mb-8 md:mb-10">
             Embarking on the path to becoming a true champion is a profound and
             transformative journey that starts at this very moment, filled with
             countless challenges, opportunities for growth, and moments of triumph

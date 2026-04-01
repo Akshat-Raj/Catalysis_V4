@@ -51,15 +51,11 @@ function AboutMobile() {
 
 function AboutLeft() {
   return (
-    <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-10">
-      <div className="mb-6">
-        <Image
-          src="/about/about-us.png"
-          alt="About Us heading"
-          width={120}
-          height={40}
-          className="h-auto"
-        />
+    <div className="flex flex-col  lg:items-start  lg:text-left z-10">
+      <div className="mb-0 md:mb-2">
+        <div className="inline-block border border-black rounded-full px-6 py-2 bg-white text-sm md:text-base font-medium mb-6 md:mb-10">
+              ABOUT US
+        </div>
       </div>
       <div className="mb-8">
         <Image
