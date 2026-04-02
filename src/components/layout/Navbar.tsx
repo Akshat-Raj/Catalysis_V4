@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navItems = [
   { label: "Home", id: "hero" },
@@ -14,34 +13,6 @@ const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useRef(0);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScrollEvent = () => {
-      const currentScrollY = window.scrollY;
-      // Show if we scrolled up, or if we are at the top
-      if (currentScrollY < lastScrollY.current || currentScrollY < 50) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-        // Hide if we scroll down and are not at the top
-        // But only fade if the menu is closed
-        setIsOpen((prev) => {
-           if (!prev) setIsVisible(false);
-           return prev;
-        });
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScrollEvent, { passive: true });
-    return () => window.removeEventListener("scroll", handleScrollEvent);
-  }, []);
-
-  if (pathname?.startsWith("/admin")) {
-    return null;
-  }
 
   const handleScroll = (id: string) => {
     const el = document.getElementById(id);
@@ -52,11 +23,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 bg-transparent transition-all duration-500 ease-in-out ${
-        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
-      }`}
-    >
+    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
 
         <div className="cursor-pointer" onClick={() => handleScroll("hero")}>
