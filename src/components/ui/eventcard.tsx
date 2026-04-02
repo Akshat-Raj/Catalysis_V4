@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface EventCardProps {
   event: {
@@ -6,6 +7,7 @@ interface EventCardProps {
     type: string;
     image: string;
     color: string;
+    detailsLink: string;
     top?: string;
     width?: number;
     height?: number;
@@ -15,16 +17,16 @@ interface EventCardProps {
 export default function EventCard({ event }: EventCardProps) {
   return (
     <div className="
-      relative 
-      w-[279px] 
-      h-[420px] 
-      flex 
-      flex-col 
-      items-center 
-      justify-end 
-      transition-transform 
-      duration-300 
-      ease-out 
+      relative
+      w-[279px]
+      h-[420px]
+      flex
+      flex-col
+      items-center
+      justify-end
+      transition-transform
+      duration-300
+      ease-out
       hover:-translate-y-3
     ">
       <div className={`absolute ${event.top || "top-[-50px]"} z-10 w-[229px] h-[207px] flex items-center justify-center`}>
@@ -39,16 +41,16 @@ export default function EventCard({ event }: EventCardProps) {
       </div>
 
       <div className="
-        w-[279px] 
-        h-[337px] 
+        w-[279px]
+        h-[337px]
         bg-linear-to-t from-[#FFE296] to-[#FFFFFF]
-        border-[3px] 
-        border-black 
-        rounded-[40px] 
-        flex flex-col 
-        items-center 
-        pt-24 
-        px-4 
+        border-[3px]
+        border-black
+        rounded-[40px]
+        flex flex-col
+        items-center
+        pt-24
+        px-4
         pb-6
       ">
         <h3 className="font-nunito text-[22px] font-extrabold text-black uppercase leading-tight">
@@ -64,27 +66,30 @@ export default function EventCard({ event }: EventCardProps) {
           <div className="bg-[#CEF2FF] rounded-full py-2 px-1 text-[13px] text-center font-nunito font-medium border border-[2px] border-[#A6E0F4]">Idea Master</div>
           <div className="bg-[#D6EBDC] rounded-full py-2 px-1 text-[13px] text-center font-nunito font-medium border border-[2px] border-[#ADD6B8]">Pitch Pro</div>
         </div>
-        
-        <button className="
-          w-[254px]
-          h-[44px] 
-          bg-[#DD273E] 
-          text-white 
-          font-nunito
-          font-bold 
-          rounded-2xl 
-          border-2 
-          border-black 
-          flex
-          items-center
-          justify-center
-          transition-all
-          duration-100
-          active:scale-95
-          active:shadow-none
-        ">
+
+        <Link
+          href={event.detailsLink}
+          className="
+            w-[254px]
+            h-[44px]
+            bg-[#DD273E]
+            text-white
+            font-nunito
+            font-bold
+            rounded-2xl
+            border-2
+            border-black
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-100
+            active:scale-95
+            active:shadow-none
+          "
+        >
           VIEW DETAILS
-        </button>
+        </Link>
       </div>
     </div>
   );
