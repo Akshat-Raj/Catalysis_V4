@@ -237,7 +237,7 @@ export default function Hero() {
       <RegisterCard />
     </div>
 
-    <div className="absolute right-10 bottom-10 z-20 top-6 transition-transform hover:-translate-y-2">
+    <div className="absolute right-10 bottom-10 z-20 top-18 transition-transform hover:-translate-y-2">
       <EventHighlightsCard />
     </div>
 
