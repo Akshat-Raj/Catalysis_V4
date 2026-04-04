@@ -320,7 +320,7 @@ export default function Timeline() {
               Stay on track, Trainer
             </h1>
             <p className="text-[#3b0a1e] font-nunito text-sm md:text-base leading-relaxed max-w-xs md:text-right mb-1">
-              Two days of challenges.<br />Pick your arena and rise to the top.
+              Two days of challenges. Pick your arena and rise to the top.
             </p>
           </div>
         </div>

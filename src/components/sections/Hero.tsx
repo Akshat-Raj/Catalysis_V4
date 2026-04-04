@@ -208,7 +208,7 @@ export default function Hero() {
           text-[13px] sm:text-sm md:text-lg
           leading-relaxed md:leading-relaxed"
         >
-          Two days. Six events. One arena. Join us for Catalysis V4 — where coders, strategists, and creators compete, collaborate, and rise to the top.
+          Two days, six events, one arena. Join us for Catalysis V4, where coders, strategists, and creators compete, collaborate, and rise to the top.
         </p>
       </div>
 <div className={`relative w-full max-w-6xl mt-4 md:mt-5 reveal reveal-up ${inView} reveal-delay-2`}>

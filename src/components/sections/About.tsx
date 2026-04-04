@@ -222,13 +222,13 @@ function AboutLeft() {
 
       <div className="space-y-4 md:space-y-6 text-[#3b0a1e] font-nunito text-[14px] md:text-[18px] leading-relaxed max-w-xl">
         <p>
-          Catalysis is not just an event — it&apos;s a platform designed to spark
-          innovation and accelerate ideas into reality. Across two action-packed days,
+          Catalysis is more than just an event. It&apos;s a platform built to spark
+          innovation and push ideas into reality. Across two action-packed days,
           participants battle it out in six unique events spanning technical challenges,
           gaming, speed typing, and startup pitching.
         </p>
         <p>
-          Apr 17–18 · DSCE Bangalore. Open to all branches.
+          April 17 and 18 at DSCE Bangalore. Open to students from all branches.
           A space to learn, compete, collaborate, and grow.
         </p>
       </div>
