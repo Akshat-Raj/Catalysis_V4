@@ -75,12 +75,12 @@ function RegisterCard() {
           <div 
             className="
               absolute inset-0 translate-y-2 
-              bg-[#3A001D] border-[3px] border-black rounded-2xl
-              opacity-80
+              bg-[#3A001D] border-[3px] border-[#3A001D] rounded-2xl
+              opacity-20
               z-0
               transition-transform duration-150 ease-out
             "
-            style={{ transform: "rotate(6deg)" }}
+            style={{ transform: "rotate(8deg)" }}
           />
 
           <button
