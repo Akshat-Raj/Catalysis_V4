@@ -74,19 +74,19 @@ function RegisterCard() {
         <div className="relative inline-block group mt-10 select-none">
           <div 
             className="
-              absolute inset-0 translate-y-3 
+              absolute inset-0 translate-y-2 
               bg-[#3A001D] border-[3px] border-black rounded-2xl
               opacity-80
               z-0
               transition-transform duration-150 ease-out
             "
-            style={{ transform: "rotate(3deg)" }}
+            style={{ transform: "rotate(6deg)" }}
           />
 
           <button
             onClick={() => router.push("/register")}
             className="
-              relative px-12 py-3.5 
+              relative px-6 py-3.5 
               bg-white text-black 
               border-[3px] border-black rounded-2xl
               
