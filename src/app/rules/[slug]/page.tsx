@@ -135,19 +135,6 @@ const RulesPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
       {/* Footer / CTA Area */}
       <div className="flex flex-col items-center text-center py-20 relative z-10 bg-[#FFFFFF] dark:bg-[#0A0018]">
-        <Image
-          src="/catalysis.png"
-          alt="catalysis logo"
-          width={225}
-          height={82}
-          className="mx-auto mb-4 dark:brightness-0 dark:invert"
-          style={{ width: "auto", height: "auto" }}
-          priority
-        />
-        {/* Organiser credit */}
-        <p className="font-['Nunito'] font-bold text-[13px] text-[#DD273E] tracking-widest uppercase mb-8">
-          Club Genesis &nbsp;·&nbsp; ISE Dept, DSCE &nbsp;·&nbsp; Catalysis V4.0
-        </p>
         <h2 className="text-[48px] md:text-[68px] leading-[120%] font-['Gliker'] font-semibold text-[#000000] dark:text-white/80 max-w-[974px]">
           Ready to Prove Your Speed?
         </h2>
