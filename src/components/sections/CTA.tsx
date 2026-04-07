@@ -22,12 +22,12 @@ export default function CTA() {
             <Image
               src="/catalysis.png"
               alt="Catalysis Logo"
-              width={192}
-              height={64}
+              width={1920}
+              height={1080}
               unoptimized
               priority
               quality={100}
-              className="h-auto w-auto"
+              className="h-auto w-48 md:w-64"
             />
           </div>
 

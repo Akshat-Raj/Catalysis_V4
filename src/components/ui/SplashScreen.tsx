@@ -30,8 +30,8 @@ const POKEBALLS = [
   "/splash/pokeballs/pokeball-9.png",
 ];
 
-const LOGO_W = 200;
-const LOGO_H = 73;
+const LOGO_W = 280;
+const LOGO_H = 158;
 
 export default function SplashScreen() {
   const [state, setState]           = useState<State>("idle");

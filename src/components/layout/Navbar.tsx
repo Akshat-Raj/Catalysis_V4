@@ -84,9 +84,9 @@ export default function Navbar() {
             <Image
               src="/catalysis.png"
               alt="Catalysis"
-              width={isScrolled ? 100 : 120}
-              height={isScrolled ? 36 : 44}
-              className="h-auto drop-shadow-md"
+              width={1920}
+              height={1080}
+              className={`h-auto drop-shadow-md transition-all duration-300 ${isScrolled ? "w-20" : "w-24"}`}
               unoptimized
               priority
               quality={100}
