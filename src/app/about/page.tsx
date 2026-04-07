@@ -33,7 +33,7 @@ export default function AboutPage() {
           </h1>
           
           <p className="text-lg text-white/90 max-w-[520px] mt-6 leading-relaxed font-semibold">
-            The Student Forum of the Department of ISE at DSCE — a collective on a mission to turn wild ideas into unforgettable technical experiences.
+            The Student Forum of the Department of ISE at DSCE - a collective on a mission to turn wild ideas into unforgettable technical experiences.
           </p>
         </div>
 
@@ -130,8 +130,8 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-5 text-[16px] leading-[1.75] text-[#444] font-semibold">
             <p>Genesis is the official Student Forum of the Department of Information Science and Engineering (ISE) at Dayananda Sagar College of Engineering (DSCE).</p>
-            <p>What started in 2017 with our foundational 24-hour hackathons and quiz contests has blossomed into a campus powerhouse. We believe the best learning happens when you throw yourself into the deep end—which is why we orchestrate everything from mock placements and technical workshops to our flagship multi-day fest, Catalysis.</p>
-            <p>Our name says it all. Genesis is the beginning of everything — and that&apos;s exactly the energy we bring to every project, every event, every idea.</p>
+            <p>What started in 2017 with our foundational 24-hour hackathons and quiz contests has blossomed into a campus powerhouse. We believe the best learning happens when you throw yourself into the deep end-which is why we orchestrate everything from mock placements and technical workshops to our flagship multi-day fest, Catalysis.</p>
+            <p>Our name says it all. Genesis is the beginning of everything - and that&apos;s exactly the energy we bring to every project, every event, every idea.</p>
           </div>
         </div>
         
@@ -193,7 +193,7 @@ export default function AboutPage() {
           <div className="bg-[#3065A6] text-white border-4 border-[#1A0A0E] rounded-2xl p-8 lg:p-10 shadow-[6px_6px_0_#1A0A0E] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0_#1A0A0E] transition-all relative overflow-hidden group">
             <h3 className="font-gliker text-3xl tracking-[2px] mb-3 leading-none">Celebrate Growth</h3>
             <p className="text-[15px] leading-[1.65] text-white/85 font-semibold">
-              We don&apos;t just run competitions — we prepare you for the future. From &quot;Tech-Scoffing&quot; mock placements to alumni guidance for higher studies abroad.
+              We don&apos;t just run competitions - we prepare you for the future. From &quot;Tech-Scoffing&quot; mock placements to alumni guidance for higher studies abroad.
             </p>
           </div>
         </div>
@@ -272,7 +272,7 @@ export default function AboutPage() {
           Ready to Join the Crew?
         </h2>
         <p className="text-lg text-white/85 mb-9 font-semibold relative z-10 max-w-2xl mx-auto">
-          Whether you want to compete, volunteer, or build the next Catalysis — Genesis has a spot for you.
+          Whether you want to compete, volunteer, or build the next Catalysis - Genesis has a spot for you.
         </p>
         
         <button disabled className="inline-block bg-gray-200 text-[#1A0A0E] font-gliker text-[22px] tracking-[3px] py-4 px-12 rounded-full border-4 border-[#1A0A0E] shadow-[6px_6px_0_#1A0A0E] relative z-10 uppercase cursor-not-allowed opacity-70">
