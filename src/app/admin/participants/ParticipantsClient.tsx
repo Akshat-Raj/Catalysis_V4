@@ -3,10 +3,16 @@
 import { useEffect, useState, useCallback } from "react";
 import EditModal from "./EditModal";
 
-const ALL_EVENTS = ["all", "technoseek", "typemaster", "clash_royale", "coding_relay", "dsa_smackdown", "pitch_perfect"];
+const ALL_EVENTS = ["all", "technoseek", "typemaster", "clash_royale", "coding_relay", "dsa_smackdown", "pitch_perfect", "prompt_wars"];
 const EVENT_COLORS: Record<string, string> = {
   technoseek: "#6366f1", typemaster: "#8b5cf6", clash_royale: "#ec4899",
   coding_relay: "#f59e0b", dsa_smackdown: "#10b981", pitch_perfect: "#3b82f6",
+  prompt_wars: "#4a8fd4",
+};
+const EVENT_NAMES: Record<string, string> = {
+  technoseek: "Technoseek", typemaster: "Typemaster", clash_royale: "Clash Royale",
+  coding_relay: "Coding Relay", dsa_smackdown: "DSA Smackdown", pitch_perfect: "Ideathon",
+  prompt_wars: "Prompt Wars",
 };
 const PAGE_SIZE = 15;
 
@@ -147,7 +153,7 @@ export default function ParticipantsClient() {
         >
           {ALL_EVENTS.map((e) => (
             <option key={e} value={e} style={{ background: "#13182e" }}>
-              {e === "all" ? "All Events" : e.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+              {e === "all" ? "All Events" : EVENT_NAMES[e] ?? e.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
             </option>
           ))}
         </select>
@@ -204,7 +210,7 @@ export default function ParticipantsClient() {
                           color: EVENT_COLORS[p.event] ?? "#6366f1",
                           fontSize: 11, fontWeight: 600, textTransform: "capitalize", whiteSpace: "nowrap",
                         }}>
-                          {p.event.replace(/_/g, " ")}
+                          {EVENT_NAMES[p.event] ?? p.event.replace(/_/g, " ")}
                         </span>
                       </td>
                       <td style={tdStyle}><span style={{ color: "#64748b" }}>{p.team_name || "-"}</span></td>
@@ -340,7 +346,7 @@ export default function ParticipantsClient() {
               Delete Registration?
             </h3>
             <p style={{ color: "#64748b", textAlign: "center", margin: "0 0 24px", fontSize: 14 }}>
-              This will permanently remove <strong style={{ color: "#94a3b8" }}>{confirmDelete.member1?.name}</strong>&apos;s registration for <strong style={{ color: "#94a3b8" }}>{confirmDelete.event.replace(/_/g, " ")}</strong>. This cannot be undone.
+              This will permanently remove <strong style={{ color: "#94a3b8" }}>{confirmDelete.member1?.name}</strong>&apos;s registration for <strong style={{ color: "#94a3b8" }}>{EVENT_NAMES[confirmDelete.event] ?? confirmDelete.event.replace(/_/g, " ")}</strong>. This cannot be undone.
             </p>
             <div style={{ display: "flex", gap: 12 }}>
               <button
