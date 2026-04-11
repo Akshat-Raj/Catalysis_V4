@@ -10,6 +10,17 @@ const EVENT_COLORS: Record<string, string> = {
   coding_relay: "#f59e0b",
   dsa_smackdown: "#10b981",
   pitch_perfect: "#3b82f6",
+  prompt_wars: "#4a8fd4",
+};
+
+const EVENT_NAMES: Record<string, string> = {
+  technoseek: "Technoseek",
+  typemaster: "Typemaster",
+  clash_royale: "Clash Royale",
+  coding_relay: "Coding Relay",
+  dsa_smackdown: "DSA Smackdown",
+  pitch_perfect: "Ideathon",
+  prompt_wars: "Prompt Wars",
 };
 
 interface EventCount { event: string; count: number }
@@ -83,7 +94,7 @@ export default function DashboardClient() {
                 <div key={event}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
                     <span style={{ color: "#94a3b8", fontSize: 13, textTransform: "capitalize" }}>
-                      {event.replace(/_/g, " ")}
+                      {EVENT_NAMES[event] ?? event.replace(/_/g, " ")}
                     </span>
                     <span style={{ color: "#f1f5f9", fontSize: 13, fontWeight: 600 }}>{count}</span>
                   </div>
@@ -137,7 +148,7 @@ export default function DashboardClient() {
                             color: EVENT_COLORS[p.event] ?? "#6366f1",
                             fontSize: 11, fontWeight: 600, textTransform: "capitalize",
                           }}>
-                            {p.event.replace(/_/g, " ")}
+                            {EVENT_NAMES[p.event] ?? p.event.replace(/_/g, " ")}
                           </span>
                         </td>
                         <td style={td}>{p.team_name || "-"}</td>

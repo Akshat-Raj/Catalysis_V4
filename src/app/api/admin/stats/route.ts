@@ -10,6 +10,7 @@ const ALL_EVENTS = [
   "coding_relay",
   "dsa_smackdown",
   "pitch_perfect",
+  "prompt_wars",
 ];
 
 export async function GET() {
