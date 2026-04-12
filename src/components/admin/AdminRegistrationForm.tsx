@@ -1,8 +1,6 @@
-// src/components/admin/AdminRegistrationForm.tsx
 "use client";
 import { useState } from "react";
 
-// Constants
 const TEAM_EVENTS = ["technoseek", "coding_relay"];
 const SOLO_EVENTS = ["typemaster", "dsa_smackdown", "pitch_perfect", "clash_royale", "prompt_wars"];
 
@@ -119,7 +117,6 @@ export default function AdminRegistrationForm() {
   
   return (
     <div>
-      {/* Header */}
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ color: "#f1f5f9", fontSize: 28, fontWeight: 700, margin: "0 0 6px", letterSpacing: "-0.5px" }}>
           Help Desk Registration
@@ -130,7 +127,6 @@ export default function AdminRegistrationForm() {
       </div>
       
       <form onSubmit={handleSubmit}>
-        {/* Event Selection Card */}
         <div style={cardStyle}>
           <label style={labelStyle}>
             Select Event <span style={{ color: "#f87171" }}>*</span>
@@ -157,7 +153,6 @@ export default function AdminRegistrationForm() {
           )}
         </div>
         
-        {/* Team Name (for team events) */}
         {showTeamFields && (
           <div style={cardStyle}>
             <label style={labelStyle}>
@@ -174,7 +169,6 @@ export default function AdminRegistrationForm() {
           </div>
         )}
         
-        {/* Member 1 (Lead) - Always required */}
         <div style={cardStyle}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
             <h3 style={{ color: "#a5b4fc", fontSize: 14, fontWeight: 600, margin: 0 }}>Member 1 (Team Lead)</h3>
@@ -196,7 +190,6 @@ export default function AdminRegistrationForm() {
           </div>
         </div>
         
-        {/* Member 2 - Required for team events */}
         {showTeamFields && (
           <div style={cardStyle}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
@@ -220,7 +213,6 @@ export default function AdminRegistrationForm() {
           </div>
         )}
         
-        {/* Member 3 - Required for BOTH Technoseek and Coding Relay */}
         {showTeamFields && (
           <div style={cardStyle}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
@@ -244,7 +236,6 @@ export default function AdminRegistrationForm() {
           </div>
         )}
         
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -266,7 +257,6 @@ export default function AdminRegistrationForm() {
           )}
         </button>
         
-        {/* Result Message */}
         {result && (
           <div style={{
             padding: "14px 18px",
@@ -288,7 +278,6 @@ export default function AdminRegistrationForm() {
   );
 }
 
-// Styles matching the admin panel theme
 const cardStyle: React.CSSProperties = {
   background: "rgba(255,255,255,0.04)",
   border: "1px solid rgba(255,255,255,0.07)",

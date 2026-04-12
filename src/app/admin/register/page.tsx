@@ -1,4 +1,3 @@
-// src/app/admin/register/page.tsx
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";

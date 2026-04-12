@@ -1,4 +1,3 @@
-// src/app/api/internal/register/route.ts (NEW FILE)
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { dbConnect } from "@/lib/dbConnect";
@@ -16,7 +15,6 @@ const EVENT_NAMES: Record<string, string> = {
 };
 
 export async function POST(req: Request) {
-  // 1. Require admin authentication (NO rate limiting)
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized. Admin access required." }, { status: 401 });
@@ -27,7 +25,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { event, team_name, member1, member2, member3 } = body;
 
-    // Same validation logic as your public API (copy from your route.ts)
     if (!event || !member1?.usn) {
       return NextResponse.json({ error: "Lead member USN is required." }, { status: 400 });
     }
@@ -55,7 +52,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // Database checks
     for (const usn of activeUsns) {
       const alreadyInEvent = await Participant.findOne({
         event,
@@ -87,7 +83,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // Save to Database
     const sanitizedMember1 = { ...member1, usn: m1_usn };
     const sanitizedMember2 = member2?.usn ? { ...member2, usn: m2_usn } : {};
     const sanitizedMember3 = member3?.usn ? { ...member3, usn: m3_usn } : {};
@@ -100,7 +95,6 @@ export async function POST(req: Request) {
       member3: sanitizedMember3,
     });
 
-    // Send email (don't await)
     try {
       const readableEventName = EVENT_NAMES[event] || event;
       if (sanitizedMember1?.email) {
