@@ -112,21 +112,36 @@ export default function HelpDeskForm() {
         body: JSON.stringify(data),
       });
       
-      const responseData = await res.json();
-      setResult({ success: res.ok, data: responseData });
+      let responseData;
+      try {
+        responseData = await res.json();
+      } catch {
+        responseData = { message: "Registration successful" };
+      }
       
       if (res.ok) {
-        e.currentTarget.reset();
+        setResult({ success: true, data: responseData });
+        // Fix: Use e.target instead of e.currentTarget
+        (e.target as HTMLFormElement).reset();
         setSelectedEvent("");
         setShowTeamFields(false);
+      } else {
+        setResult({ 
+          success: false, 
+          data: { error: responseData.error || "Registration failed" } 
+        });
       }
     } catch (error) {
-      setResult({ success: false, data: { error: "Network error. Please try again." } });
+      console.error("Network error:", error);
+      setResult({ 
+        success: false, 
+        data: { error: "Network error. Please try again." } 
+      });
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <div>
       {/* Header with Logout */}
@@ -251,13 +266,52 @@ export default function HelpDeskForm() {
         {/* Result Message */}
         {result && (
           <div style={{
-            padding: 14, borderRadius: 12, marginTop: 20,
+            padding: "12px 16px",
+            borderRadius: 12,
+            marginTop: 20,
             background: result.success ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)",
             border: `1px solid ${result.success ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)"}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 12,
           }}>
-            <span style={{ color: result.success ? "#4ade80" : "#f87171" }}>
+            <span style={{ 
+              color: result.success ? "#4ade80" : "#f87171",
+              flex: 1,
+              fontSize: 14,
+            }}>
               {result.success ? "✅ Registration successful!" : `❌ Error: ${result.data.error}`}
             </span>
+            <button
+              onClick={() => setResult(null)}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: result.success ? "#4ade80" : "#f87171",
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 4,
+                transition: "all 0.2s",
+                opacity: 0.7,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.background = result.success ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "0.7";
+                e.currentTarget.style.background = "transparent";
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
           </div>
         )}
       </form>
