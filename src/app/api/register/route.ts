@@ -47,6 +47,10 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { event, team_name, member1, member2, member3 } = body;
 
+    if (event === "clash_royale") {
+      return NextResponse.json({ error: "Registrations for Clash Royale are closed." }, { status: 400 });
+    }
+
     // 1. Basic Presence Check
     if (!event || !member1?.usn) {
       return NextResponse.json({ error: "Lead member USN is required." }, { status: 400 });
