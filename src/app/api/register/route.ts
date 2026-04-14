@@ -9,7 +9,7 @@ import { sendRegistrationEmail } from "@/lib/emailService";
 const EVENT_NAMES: Record<string, string> = {
   pitch_perfect: "Ideathon",
   typemaster: "Typemaster",
-  clash_royale: "Clash Royale",
+  // clash_royale: "Clash Royale",
   coding_relay: "Coding Relay",
   dsa_smackdown: "DSA Smackdown",
   technoseek: "Technoseek",
