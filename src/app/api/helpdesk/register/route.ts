@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
+import { getHelpdeskSession } from "@/lib/helpdeskSession";
 import { dbConnect } from "@/lib/dbConnect";
 import Participant, { TEAM_EVENTS } from "@/models/Participant";
-import { registrationRateLimiter } from "@/lib/simpleRateLimit";
-
-//emailServiceCode - Import the service and create a mapping for readable event names
 import { sendRegistrationEmail } from "@/lib/emailService";
 
 const EVENT_NAMES: Record<string, string> = {
@@ -16,30 +14,10 @@ const EVENT_NAMES: Record<string, string> = {
   prompt_wars: "Prompt Wars",
 };
 
-//emailServiceCode
-
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || req.headers.get("x-real-ip") || "unknown";
-  
-  const rateLimit = registrationRateLimiter.check(ip);
-  
-  if (!rateLimit.allowed) {
-    const waitTime = Math.ceil((rateLimit.resetTime - Date.now()) / 1000);
-    return NextResponse.json(
-      { 
-        error: `Too many registration attempts. Please try again in ${waitTime} seconds.`,
-        retryAfter: waitTime
-      },
-      { 
-        status: 429,
-        headers: {
-          'Retry-After': waitTime.toString(),
-          'X-RateLimit-Limit': '5',
-          'X-RateLimit-Remaining': '0',
-          'X-RateLimit-Reset': rateLimit.resetTime.toString()
-        }
-      }
-    );
+  const session = await getHelpdeskSession();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized. Helpdesk access required." }, { status: 401 });
   }
 
   try {
@@ -47,41 +25,33 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { event, team_name, member1, member2, member3 } = body;
 
-    // 1. Basic Presence Check
     if (!event || !member1?.usn) {
       return NextResponse.json({ error: "Lead member USN is required." }, { status: 400 });
     }
-    // 2. Extract and Normalize USNs
+    
     const m1_usn = member1.usn.trim().toUpperCase();
     const m2_usn = member2?.usn?.trim().toUpperCase() || "";
     const m3_usn = member3?.usn?.trim().toUpperCase() || "";
 
     const activeUsns = [m1_usn, m2_usn, m3_usn].filter(u => u !== "");
 
-    // 3. LOOPHOLE 1: Check for duplicates within this single registration
-    // This prevents Member 1 and Member 2 from using the same USN
     const uniqueUsnsInRequest = new Set(activeUsns);
     if (uniqueUsnsInRequest.size !== activeUsns.length) {
       return NextResponse.json({
         error: "Duplicate USNs detected in the same team. Each member must be unique."
       }, { status: 400 });
     }
-
-    // 4. Team Event Specific Validation
-    const isTeam = TEAM_EVENTS.includes(event);
+    const isTeam = TEAM_EVENTS.includes(event as typeof TEAM_EVENTS[number]);
     if (isTeam) {
       if (!team_name || team_name.trim().length < 2) {
         return NextResponse.json({ error: "Team name is required for team events." }, { status: 400 });
       }
-      if (activeUsns.length !== 3) {
-        return NextResponse.json({ error: "This event requires exactly 3 members — no more, no less." }, { status: 400 });
+      if (activeUsns.length < 2) {
+        return NextResponse.json({ error: "Team events require at least two unique participants." }, { status: 400 });
       }
     }
 
-    // 5. Database Logic Engine (Checks for Every Participant)
     for (const usn of activeUsns) {
-
-      // LOOPHOLE 2: Check if this USN is ALREADY in this event (any slot)
       const alreadyInEvent = await Participant.findOne({
         event,
         $or: [
@@ -97,7 +67,6 @@ export async function POST(req: Request) {
         }, { status: 409 });
       }
 
-      // LOOPHOLE 3: Check Global 5-Event Limit
       const totalEvents = await Participant.countDocuments({
         $or: [
           { "member1.usn": usn },
@@ -113,12 +82,10 @@ export async function POST(req: Request) {
       }
     }
 
-    // 6. Data Sanitization (Ensures data is clean in DB)
     const sanitizedMember1 = { ...member1, usn: m1_usn };
     const sanitizedMember2 = member2?.usn ? { ...member2, usn: m2_usn } : {};
     const sanitizedMember3 = member3?.usn ? { ...member3, usn: m3_usn } : {};
 
-    // 7. Save to Database
     await Participant.create({
       event,
       team_name: isTeam ? team_name.trim() : "",
@@ -127,7 +94,6 @@ export async function POST(req: Request) {
       member3: sanitizedMember3,
     });
 
-    //emailServiceCode - Send confirmation ONLY to the Lead (Member 1)
     try {
       const readableEventName = EVENT_NAMES[event] || event;
       if (sanitizedMember1?.email) {
@@ -139,15 +105,13 @@ export async function POST(req: Request) {
         });
       }
     } catch (emailError) {
-      console.error("Email Service Error (Lead Only):", emailError);
-      // We log the error but don't throw, ensuring the user still sees the success screen.
+      console.error("Email Service Error:", emailError);
     }
-    //emailServiceCode
 
     return NextResponse.json({ message: "Registration successful!" }, { status: 201 });
 
   } catch (error) {
-    console.error("Critical API Error:", error);
+    console.error("Helpdesk API Error:", error);
     return NextResponse.json({ error: "Internal Server Error. Please contact support." }, { status: 500 });
   }
 }
