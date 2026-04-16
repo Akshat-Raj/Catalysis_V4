@@ -157,7 +157,7 @@ const TechnoseekPage = () => {
         </h2>
 
         <p className="mt-4 text-[18px] md:text-[22px] leading-[30px] font-['Nunito'] font-medium text-[#454545] dark:text-white/55 max-w-[554px]">
-          Don't miss your chance to innovate, compete, and win at Catalysis 4.0.
+          Don&apos;t miss your chance to innovate, compete, and win at Catalysis 4.0.
         </p>
 
         <Link
