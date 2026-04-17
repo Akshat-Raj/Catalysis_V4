@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useAnimate, AnimatePresence } from "framer-motion";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 
 // Precomputed at module level — avoids Math.random() inside render (react-hooks/purity)
 const STARS = Array.from({ length: 70 }, (_, i) => ({
@@ -152,6 +152,8 @@ function Pokeball() {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 export default function GenesisAnimation() {
   const [scope, animate] = useAnimate();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const thunderRef = useRef<HTMLAudioElement | null>(null);
   const [done, setDone] = useState(false);
   const [started, setStarted] = useState(false);   // click-gate
   const [dims, setDims] = useState({ w: 1280, h: 720 });
@@ -178,6 +180,19 @@ export default function GenesisAnimation() {
     setTimeout(() => setShaking(false), 260);
   };
 
+  const handleStart = () => {
+    setStarted(true);
+    if (!audioRef.current) {
+      audioRef.current = new Audio("/audio/bg-music-3.mp3");
+      audioRef.current.volume = 0.5;
+    }
+    if (!thunderRef.current) {
+      thunderRef.current = new Audio("/audio/Thunder Sound Effects Loud and Scary_320k.mp3");
+      thunderRef.current.volume = 0.6;
+    }
+    audioRef.current.play().catch(err => console.error("Audio playback failed:", err));
+  };
+
   // Animation only runs after the user clicks the Pokéball
   useEffect(() => {
     if (!started) return;
@@ -193,6 +208,11 @@ export default function GenesisAnimation() {
 
       // ── PHASE 2: Pikachu charges up ───────────────────────────────────────
       setCharged(true);
+      // Synchronize thunder with charge up
+      if (thunderRef.current) {
+        thunderRef.current.currentTime = 0;
+        thunderRef.current.play().catch(e => console.error("Thunder failed", e));
+      }
       await new Promise<void>((r) => setTimeout(r, 700));
 
       // ── PHASE 3: Five sequential lightning strikes ─────────────────────────
@@ -242,6 +262,16 @@ export default function GenesisAnimation() {
       );
 
       setDone(true);
+
+      // Stop all music when animation is fully over
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      if (thunderRef.current) {
+        thunderRef.current.pause();
+        thunderRef.current.currentTime = 0;
+      }
     };
 
     run();
@@ -306,7 +336,7 @@ export default function GenesisAnimation() {
               }}
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => setStarted(true)}
+              onClick={handleStart}
               style={{
                 background: "none",
                 border: "none",
